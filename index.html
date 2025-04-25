@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>GitHub Actions Durumu</title>
+</head>
+<body>
+  <h1>Pipeline Durumu</h1>
+  <pre id="status">Yükleniyor...</pre>
+
+  <script>
+    fetch('status.json')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('status').textContent = 
+          `Durum: ${data.status}\nZaman: ${data.timestamp}`;
+      })
+      .catch(() => {
+        document.getElementById('status').textContent = 'Durum alınamadı.';
+      });
+  </script>
+</body>
+</html>
