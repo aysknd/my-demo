@@ -1,0 +1,27 @@
+name: Basit Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repo'yu klonla
+        uses: actions/checkout@v3
+
+      - name: Başarılı çalışmayı simüle et
+        run: echo "Her şey yolunda!"
+
+      - name: Durum dosyası oluştur
+        run: |
+          echo '{ "status": "success", "timestamp": "'$(date)'" }' > status.json
+
+      - name: GitHub Pages'e yükle
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+          publish_branch: gh-pages
